@@ -1,4 +1,4 @@
-// Type definitions for http://github.com/mattermost/dynamic-virtualized-list [v1.0.0-beta]
+// Type definitions for dynamic-virtualized-list [v1.0.0-beta]
 // Project: https://github.com/mattermost/dynamic-virtualized-list
 // Definitions by: naftalimurgor http://github.com/naftalimurgor
 // This is a work in progress. Any kind of contribution is highly welcome.
@@ -121,7 +121,7 @@ declare module 'dynamic-virtualized-list' {
         innerListStyle: CSSProperties;
 
         /**
-         * CSS class for styling virtual list
+         * CSS class for styling virtual list. This is an advanced prop specific to Reactjs.
          */
         className: string;
 
@@ -174,13 +174,12 @@ declare module 'dynamic-virtualized-list' {
         scrollBy: (scrollOffset: number, scrollBy: number) => void;
 
         /**
-         * Scroll to a specified offset. optionally uses window.requestAnimationFrame() to schedule the scroll before
-         * next repaint.
+         * Scroll to element by a specified offset or by a given value.  Uses window.requestAnimationFrame() when correcting scroll in Chrome.
          */
         scrollTo(scrollOffset: number, scrollByValue?: number, useAnimationFrame?: boolean): void;
 
         /**
-         * scroll to a specified item
+         * Scroll to a specific item.
          */
         scrollToItem(index: number, align: string, offset?: number): void;
 
