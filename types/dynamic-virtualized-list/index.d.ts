@@ -1,12 +1,21 @@
-// Type definitions for http://github.com/mattermost/dynamic-virtualized-list [v1.0.0-beta]
+// Type definitions for dynamic-virtualized-list [v1.0.0-beta]
 // Project: https://github.com/mattermost/dynamic-virtualized-list
 // Definitions by: naftalimurgor http://github.com/naftalimurgor
 // This is a work in progress. Any kind of contribution is highly welcome.
 // TypeScript version: 3.9.6
 
-import {PureComponent, Ref, CSSProperties} from 'react';
 
 declare module 'dynamic-virtualized-list' {
+
+    /**
+      putting this import statement inside the module allows these type definitions to used
+      locally, like placing the types inside a folder like /types/external/dynamic-virtualized-list.d.ts. 
+      Putting the import outside makes the type definitions behave like regular
+      .ts files hence not recognized as type definitions as in .d.ts
+      see discussion: https://stackoverflow.com/questions/39040108/import-class-in-definition-file-d-ts
+     */
+
+    import * as React from 'react';
 
     /**
      * Arguments  passed to onScroll prop function callback as an object.
@@ -45,7 +54,7 @@ declare module 'dynamic-virtualized-list' {
          */
         visibleStopIndex?: number;
     }
-    
+
     /**
      * 
      * Props for DynamicSizeList component.
@@ -108,20 +117,20 @@ declare module 'dynamic-virtualized-list' {
          * Ref of the list container which is used for determining changes for scroll containers.
          * 
          */
-        innerRef: Ref<any>;
+        innerRef: React.Ref<any>;
 
         /**
          * Styles for virtualized list.
          */
-        style: CSSProperties;
+        style: React.CSSProperties;
 
         /**
          * Styles for dynamic list container.
          */
-        innerListStyle: CSSProperties;
+        innerListStyle: React.CSSProperties;
 
         /**
-         * CSS class for styling virtual list
+         * CSS class for styling virtual list. This is an advanced prop specific to Reactjs.
          */
         className: string;
 
@@ -152,7 +161,7 @@ declare module 'dynamic-virtualized-list' {
         onItemsRendered: (args: OnItemsRenderedArgs) => void;
 
         /**
-         *  Callback called when scroll to fails because the items are not rendered in the view before.
+         *  Callback called when scrollTo fails because the items are not rendered in the view before.
          */
         scrollToFailed: (index: number) => void;
 
@@ -167,20 +176,19 @@ declare module 'dynamic-virtualized-list' {
         offset?: number;
     }
 
-    export class DynamicSizeList extends PureComponent<DynamicSizeListProps> {
+    export class DynamicSizeList extends React.PureComponent<DynamicSizeListProps> {
         /**
          * Scroll element by a given amount of pixels.
          */
         scrollBy: (scrollOffset: number, scrollBy: number) => void;
 
         /**
-         * Scroll to a specified offset. optionally uses window.requestAnimationFrame() to schedule the scroll before
-         * next repaint.
+         * Scroll to element by a specified offset or by a given value.  Uses window.requestAnimationFrame() when correcting scroll in Chrome.
          */
         scrollTo(scrollOffset: number, scrollByValue?: number, useAnimationFrame?: boolean): void;
 
         /**
-         * scroll to a specified item
+         * Scroll to a specific item.
          */
         scrollToItem(index: number, align: string, offset?: number): void;
 
